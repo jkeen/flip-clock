@@ -1,23 +1,45 @@
 $(document).ready(function() {
+  function time() {
+    var now = new Date();
+    var hours = now.getHours()
+    var minutes = now.getMinutes();
+    var seconds = now.getSeconds();
+    
+    if (hours > 12)
+      hours = hours - 12;
+    if (hours == 0)
+      hours = 12
+      
+    if (minutes < 10)
+      minutes = "0" + minutes
+    if (seconds < 10)
+      seconds = "0" + seconds
+      
+    return {
+      hours: hours.toString(),
+      minutes: minutes.toString(),
+      seconds: seconds.toString()
+    }
+  }
   
   var $hours = $(".hours");
   var $minutes = $(".minutes");
   var $seconds = $(".seconds");
   // 
-  var now = new Date();
-  $hours.html(now.getHours());
-  $minutes.html(now.getMinutes());
-  $seconds.html(now.getSeconds());
+  var now = time();
+  $hours.html(now.hours);
+  $minutes.html(now.minutes);
+  $seconds.html(now.seconds);
   
   $hours.flippanel()
   $minutes.flippanel()
   $seconds.flippanel()
   
   setInterval(function() {
-    var now = new Date();
-    $(".hours").flippanel(now.getHours().toString());
-    $(".minutes").flippanel(now.getMinutes().toString());
-    $(".seconds").flippanel(now.getSeconds().toString());
+    now = time(); 
+    $(".hours").flippanel(now.hours);
+    $(".minutes").flippanel(now.minutes);
+    $(".seconds").flippanel(now.seconds);
     
   }, 1000)
 });

@@ -1,7 +1,18 @@
 body {
-  background-color:#333;
+  background-color:#FFF;
+  text-align:center;
+  padding:100px 20px 0;
+  font-family:"Helvetica Neue", Arial, sans-serif;
+  
+}
+footer {
+  margin-top:50px;
+  color:#666;
 }
 
+footer a {
+  color:#390270;
+}
 
 .flip-panel {
   margin:10px;
@@ -16,7 +27,7 @@ body {
   -webkit-perspective:1200;
 }
  .layer {
-  font-family:Helvetica Neue;
+  font-family:"Helvetica Neue", Arial, sans-serif;
   border-radius:15px;
   -moz-border-radius:15px;
   -webkit-border-radius:15px;
@@ -50,6 +61,7 @@ body {
 }
 .side.back {
    z-index:50;
+   -moz-transform:rotateX(180deg);
   -webkit-transform:rotateX(180deg);
 }
 .side.top-half {

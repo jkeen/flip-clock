@@ -42,17 +42,17 @@
       if (!speed) {
         speed = this.options.speed
       }
-      console.log("speed= " + speed)
       
-      if (this.next == newValue) { return; }
+      if (this.current == newValue) { return; }
       
       this.setNext(newValue);
       var txtime = speed / 1000;
       
       this.$element.find('.layer.top')      
-        .css('-moz-transition', 'all ' + txtime + 's ease-out')
-        .css('-webkit-transition', 'all ' + txtime + 's ease-out')
-        .css('transition', 'all ' + txtime + 's ease-out');
+      
+        .css('-moz-transition', 'all ' + txtime + 's ease-in-out')
+        .css('-webkit-transition', 'all ' + txtime + 's ease-in-out')
+        .css('transition', 'all ' + txtime + 's ease-in-out');
         
       this.$element.find('.layer.top')
         .css('-webkit-transform', 'rotateX(-180deg)');
