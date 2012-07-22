@@ -57,17 +57,20 @@
       this.$element.find('.layer.top')
         .css('-webkit-transform', 'rotateX(-180deg)');
 
+      this.reload(newValue, speed + 400)
+    },
+    reload: function(value, speed) {
       var _this = this;
       window.setTimeout(function() {
         _this.$element.find('.layer.top')      
           .css('-moz-transition', 'none')
           .css('-webkit-transition', 'none')
-          .css('transition', 'none')
-        _this.setCurrent(newValue);
+          .css('transition', 'none');
+          
+        _this.setCurrent(value);
         _this.$element.find('.layer.top')
           .css('-webkit-transform', 'rotateX(0deg)');
-      }, speed)
-            
+      }, speed + 200)
     },
     run: function(values) {
       var timeIncrement = (1000/(values.length));      
@@ -110,7 +113,7 @@
   $.fn.flippanel.Constructor = FlipPanel
 
   $.fn.flippanel.defaults = {
-    template: '<span class="layer top"><span class="back side bottom-half next"></span><span class="side top-half current"></span></span><span class="layer middle"><span class="side top-half next"></span></span><span class="layer bottom current"></span>',
+    template: '<span class="layer top"><span class="back side bottom-half"><span class="adjust next"></span></span><span class="side top-half current"></span></span><span class="layer middle"><span class="side top-half next"></span></span><span class="layer bottom current"></span><hr/>',
     speed: 350
   }
 
