@@ -48,8 +48,7 @@
       this.setNext(newValue);
       var txtime = speed / 1000;
       
-      this.$element.find('.layer.top')      
-      
+      this.$element.find('.layer.top')
         .css('-moz-transition', 'all ' + txtime + 's ease-in-out')
         .css('-webkit-transition', 'all ' + txtime + 's ease-in-out')
         .css('transition', 'all ' + txtime + 's ease-in-out');
@@ -57,20 +56,25 @@
       this.$element.find('.layer.top')
         .css('-webkit-transform', 'rotateX(-180deg)');
 
-      this.reload(newValue, speed + 400)
+      this.reload(newValue, speed)
     },
     reload: function(value, speed) {
       var _this = this;
+      window.setTimeout(function() {
+        // Reset values half way through transition so we don't get backface visibility bleedthrough
+        _this.setCurrent(value);
+      }, speed/2)
+      
       window.setTimeout(function() {
         _this.$element.find('.layer.top')      
           .css('-moz-transition', 'none')
           .css('-webkit-transition', 'none')
           .css('transition', 'none');
-          
-        _this.setCurrent(value);
+        
         _this.$element.find('.layer.top')
           .css('-webkit-transform', 'rotateX(0deg)');
-      }, speed + 200)
+        
+      }, speed)
     },
     run: function(values) {
       var timeIncrement = (1000/(values.length));      
@@ -78,7 +82,6 @@
       var index = 0;
       var delayChange = function() {
         window.setTimeout(function() {
-          console.log("change to "  + values[index])
           that.change(values[index], timeIncrement);
           if (index < values.length) {
             index = index + 1;
