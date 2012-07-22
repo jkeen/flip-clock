@@ -4,10 +4,6 @@
 
   "use strict"; // jshint ;_;
 
-
- /* TOOLTIP PUBLIC CLASS DEFINITION
-  * =============================== */
-
   var FlipPanel = function (element, options) {
     this.init('flippanel', element, options)
   }
@@ -63,7 +59,7 @@
       window.setTimeout(function() {
         // Reset values half way through transition so we don't get backface visibility bleedthrough
         _this.setCurrent(value);
-      }, speed/2)
+      }, speed *0.75)
       
       window.setTimeout(function() {
         _this.$element.find('.layer.top')      
@@ -97,10 +93,6 @@
       return options
     }
   }
-
-
- /* TOOLTIP PLUGIN DEFINITION
-  * ========================= */
 
   $.fn.flippanel = function ( option ) {
     return this.each(function () {
