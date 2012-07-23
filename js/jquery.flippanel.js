@@ -38,7 +38,6 @@
       if (!speed) {
         speed = this.options.speed
       }
-      
       if (this.current == newValue) { return; }
       
       this.setNext(newValue);
