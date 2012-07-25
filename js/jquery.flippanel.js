@@ -24,13 +24,13 @@
     },
     setCurrent: function(current) {
       this.current = current;
-      this.$element.find('.current').each(function() {
+      this.$element.find('[data-current]').each(function() {
         $(this).html(current);
       })
     },
     setNext: function(next) {
       this.next = next;
-      this.$element.find('.next').each(function() {
+      this.$element.find('[data-next]').each(function() {
         $(this).html(next);
       })      
     },
@@ -49,7 +49,9 @@
         .css('transition', 'all ' + txtime + 's ease-in-out');
         
       this.$element.find('.layer.top')
-        .css('-webkit-transform', 'rotateX(-180deg)');
+        .css('-webkit-transform', 'rotateX(-180deg)')
+        .css('-moz-transform', 'rotateX(-180deg)')
+        .css('transform', 'rotateX(-180deg)');
 
       this.reload(newValue, speed)
     },
@@ -58,21 +60,23 @@
       window.setTimeout(function() {
         // Reset values half way through transition so we don't get backface visibility bleedthrough
         _this.setCurrent(value);
-      }, speed *0.75)
+      }, (speed * 0.75))
       
       window.setTimeout(function() {
-        _this.$element.find('.layer.top')      
+        _this.$element.find('.layer.top')
           .css('-moz-transition', 'none')
           .css('-webkit-transition', 'none')
           .css('transition', 'none');
         
         _this.$element.find('.layer.top')
-          .css('-webkit-transform', 'rotateX(0deg)');
+          .css('-webkit-transform', 'rotateX(0deg)')
+          .css('-moz-transform', 'rotateX(0deg)')
+          .css('transform', 'rotateX(0deg)');
         
       }, speed)
     },
     run: function(values) {
-      var timeIncrement = (1000/(values.length));      
+      var timeIncrement = (1000/(values.length));
       var that = this;
       var index = 0;
       var delayChange = function() {
@@ -107,8 +111,19 @@
   $.fn.flippanel.Constructor = FlipPanel
 
   $.fn.flippanel.defaults = {
-    template: '<span class="layer top"><span class="back side bottom-half"><span class="adjust next"></span></span><span class="side top-half current"></span></span><span class="layer middle"><span class="side top-half next"></span></span><span class="layer bottom current"></span><hr/>',
-    speed: 350
+    template: '<span class="layer top">' + 
+                  '<span class="back side layer bottom-half">' + 
+                    '<span class="adjust" data-next></span>' +
+                  '</span>' +
+                  '<span class="side layer top-half" data-current></span>' +
+               '</span>' +
+               '<span class="layer middle">' +
+                  '<span class="side layer top-half" data-next></span>' +
+               '</span>' +
+               '<span class="layer bottom" data-current>' +
+               '</span>' +
+               '<hr/>',
+    speed: 450
   }
 
 }(window.jQuery);
