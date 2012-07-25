@@ -1,4 +1,6 @@
-
+/* Jeff Keen
+   http://keen.me
+*/
 
 !function ($) {
 
